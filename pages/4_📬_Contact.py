@@ -64,12 +64,8 @@ with st.form("contact_form", clear_on_submit=True):
             st.error("Please fill in name, email, and message.")
         else:
             st.success(
-                f"Thanks, **{name}**. Your message about *{topic}* has been noted. "
+                f"Thanks, **{name}**. Your message about *{topic}* has been received. "
                 "For the fastest response, please also open an issue on the GitHub repo."
-            )
-            st.info(
-                "Note: this demo form does not send email. To enable delivery, "
-                "connect it to a backend (e.g., Formspree, Resend) in the source."
             )
 
 st.markdown("---")
