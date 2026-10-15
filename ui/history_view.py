@@ -3,7 +3,7 @@ import streamlit as st
 
 
 class HistoryView:
-    """Renders the historical charts below the prediction panel."""
+    """Renders the historical charts below the classification panel."""
 
     def __init__(self, data_loader):
         self.dl = data_loader

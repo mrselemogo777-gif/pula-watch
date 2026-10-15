@@ -9,7 +9,7 @@ from services.feature_builder import FeatureBuilder
 from services.predictor       import DroughtPredictor
 from services.risk            import RiskClassifier
 from ui.sidebar               import Sidebar
-from ui.prediction_view       import PredictionView
+from ui.classification_view   import ClassificationView
 from ui.history_view          import HistoryView
 from ui.map_view              import MapView
 
@@ -58,7 +58,7 @@ dl, predictor, fb, risk = load_app()
 # ────────────────────────────────────────────────────────────
 settings = Sidebar().render()
 
-PredictionView(dl, predictor, fb, risk).render(
+ClassificationView(dl, predictor, fb, risk).render(
     threshold=settings["threshold"],
     confirm_rule=settings["confirm_rule"],
     lag_max=settings["lag_max"],

@@ -9,8 +9,8 @@ from services.predictor import DroughtPredictor
 from services.risk import RiskClassifier
 
 
-class PredictionView:
-    """Renders the main prediction panel."""
+class ClassificationView:
+    """Renders the main classification panel."""
 
     def __init__(self, data_loader, predictor, feature_builder, risk_classifier):
         self.dl        = data_loader
@@ -25,7 +25,7 @@ class PredictionView:
     # Public
     # ------------------------------------------------------------------
     def render(self, threshold: float, confirm_rule: bool, lag_max: float) -> None:
-        """Draw the selector, run the prediction on click."""
+        """Draw the selector, run the classification on click."""
         self._render_selector()
 
         if st.button("🔍 Classify this dekad", type="primary"):
