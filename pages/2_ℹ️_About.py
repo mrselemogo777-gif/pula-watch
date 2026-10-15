@@ -7,7 +7,7 @@ st.set_page_config(
 )
 
 st.title("ℹ️ About Pula Watch")
-st.caption("Botswana Drought Early-Warning System")
+st.caption("Botswana Drought Classification Tool")
 
 # SCOPE
 st.header("⚠️ Scope")
@@ -15,30 +15,30 @@ st.header("⚠️ Scope")
 st.warning("""
 **Pula Watch is a decision-support tool, not an autonomous warning system.**
 
-It outputs drought probabilities and tiered flags for human review by
-extension officers, NGOs, or researchers. It is **not** designed to trigger
-aid disbursement, livestock movement, or water rationing without confirmation
-from a qualified officer.
+It classifies historical dekads as drought or not-drought, with confidence
+tiers for human review by extension officers, NGOs, or researchers. It is
+**not** designed to trigger aid disbursement, livestock movement, or water
+rationing without confirmation from a qualified officer.
 """)
 
-# HOW TO USE 
+# HOW TO USE
 st.header("How to use")
 
 st.markdown("""
-1. Go to the **Predict** page (home).
+1. Go to the **app** page (home).
 2. Select a **district**, **year**, and **dekad**.
 3. Choose an **operating point** in the sidebar:
    - *Farmer / community alert* — high recall, tolerates false alarms
    - *Balanced (default)* — best F1
    - *Budget-constrained* — high precision, fewer false alarms
-4. Click **🚨 Run prediction**.
+4. Click **🔍 Classify this dekad**.
 5. Review the three-tier flag (🔴 high confidence / 🟡 elevated / 🟢 low).
-6. Expand ** Full feature values** to see exactly what drove the prediction.
+6. Expand **📊 Full feature values** to see exactly what drove the classification.
 
 **All flags require human review before any action is taken.**
 """)
 
-# OPERATING POINTS 
+# OPERATING POINTS
 st.header("Operating points")
 
 st.markdown("""
@@ -50,7 +50,7 @@ st.markdown("""
 | Highest confidence | 0.85 + rule | 0.930 | 0.605 | Minimal false alarms |
 """)
 
-# SOURCES 
+# SOURCES
 st.header("Sources")
 
 st.markdown("""
@@ -64,13 +64,13 @@ st.header("🔬 Future work")
 
 st.markdown("""
 - Live CHIRPS API integration (currently manual dekad selection)
-- Large-scale climate indices (ENSO, IOD)
+- Large-scale climate indices (ENSO, IOD) — foundation for forecasting
 - Satellite vegetation indices (NDVI, EVI)
 - Soil moisture integration
 - SMS / email alerting for extension officers
 """)
 
-#  AUTHOR 
+# AUTHOR
 st.header("Author")
 st.markdown("""
 **Legakwa Selemogo**

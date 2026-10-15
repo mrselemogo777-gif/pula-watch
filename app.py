@@ -1,4 +1,4 @@
-"""Pula Watch — Botswana Drought Early-Warning System.
+"""Pula Watch — Botswana Drought Classification Tool.
 
 Streamlit entry point. Wires together data, model, and views.
 """
@@ -21,13 +21,13 @@ from utils.config import FEATURES_PKL, DEFAULT_LAG_MAX
 # Page
 # ────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Pula Watch — Botswana Drought Monitor",
+    page_title="Pula Watch — Botswana Drought Classification",
     page_icon="🌧️",
     layout="wide",
 )
 
 st.title("🌧️ Pula Watch")
-st.caption("Botswana Drought Early-Warning System · "
+st.caption("Botswana Drought Classification Tool · "
            "Ensemble (RF + XGBoost) · 1981–2026")
 st.warning(
     "**Decision-support tool.** Outputs require human review. "

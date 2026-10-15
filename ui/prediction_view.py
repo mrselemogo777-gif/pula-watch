@@ -1,4 +1,4 @@
-"""Prediction view: district/year/dekad selector, run button, flag, feature table."""
+"""Classification view: district/year/dekad selector, run button, flag, feature table."""
 import datetime as dt
 
 import pandas as pd
@@ -28,7 +28,7 @@ class PredictionView:
         """Draw the selector, run the prediction on click."""
         self._render_selector()
 
-        if st.button("🚨 Run prediction", type="primary"):
+        if st.button("🔍 Classify this dekad", type="primary"):
             self._run_and_render(threshold, confirm_rule, lag_max)
 
     # ------------------------------------------------------------------
