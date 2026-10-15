@@ -1,6 +1,6 @@
 # Pula Watch — Botswana Drought Early-Warning System
 
-**Status:** Model development complete. App packaging in progress.
+
 
 ## Notebook
 
