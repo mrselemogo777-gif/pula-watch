@@ -1,0 +1,78 @@
+{
+  "model_type": "Ensemble (RandomForest + XGBoost average, 50/50)",
+  "n_features": 30,
+  "features": [
+    "rfh",
+    "rfh_avg",
+    "r1h",
+    "r1h_avg",
+    "rfq",
+    "r1q",
+    "month",
+    "is_wet",
+    "rfh_ratio",
+    "r1h_ratio",
+    "r3h_lag1",
+    "r3h_lag2",
+    "r3h_lag3",
+    "r3h_lag4",
+    "r3h_lag5",
+    "r3h_lag6",
+    "r1h_lag1",
+    "r1h_lag2",
+    "r1h_lag3",
+    "r3h_lag1_ratio",
+    "r3h_lag2_ratio",
+    "r3h_lag3_ratio",
+    "r3h_lag4_ratio",
+    "r3h_lag5_ratio",
+    "r3h_lag6_ratio",
+    "lagged_3mo_avg",
+    "lagged_3mo_ratio",
+    "recent_deficit_count",
+    "neighbour_lag1_ratio",
+    "neighbour_lag2_ratio"
+  ],
+  "recommended_threshold": 0.65,
+  "operating_points": {
+    "high_recall": {
+      "threshold": 0.5,
+      "precision": 0.721,
+      "recall": 0.842,
+      "f1": 0.777
+    },
+    "default": {
+      "threshold": 0.65,
+      "precision": 0.834,
+      "recall": 0.792,
+      "f1": 0.812
+    },
+    "high_precision": {
+      "threshold": 0.8,
+      "lag_max": 0.72,
+      "precision": 0.906,
+      "recall": 0.646,
+      "f1": 0.754
+    },
+    "highest_precision": {
+      "threshold": 0.85,
+      "lag_max": 0.72,
+      "precision": 0.93,
+      "recall": 0.605,
+      "f1": 0.733
+    }
+  },
+  "metrics": {
+    "accuracy_random_split": 0.962,
+    "roc_auc_random_split": 0.985,
+    "accuracy_temporal": 0.96,
+    "roc_auc_temporal": 0.981,
+    "baseline_temporal": 0.882,
+    "rule_based_f1": 0.391,
+    "cv_accuracy_mean": 0.9538,
+    "cv_accuracy_std": 0.0058
+  },
+  "data_source": "HDX / WFP CHIRPS v2",
+  "districts": 10,
+  "years": "1981-2026"
+}
