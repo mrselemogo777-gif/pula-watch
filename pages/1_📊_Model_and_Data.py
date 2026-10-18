@@ -21,7 +21,7 @@ Trained on **16,360 dekads** across **10 rural districts** of Botswana, 1981–2
 """)
 
 # FEATURES 
-st.header("Features (30)")
+st.header("Features (31)")
 st.markdown("""
 | Group | Count | Examples |
 |---|---|---|
@@ -65,11 +65,11 @@ with col1:
     st.markdown("""
 | Metric | Value |
 |---|---|
-| Accuracy | 0.962 |
-| ROC-AUC | 0.985 |
-| Precision (drought) | 0.834 |
-| Recall (drought) | 0.792 |
-| F1 (drought) | 0.812 |
+| Accuracy | **0.9647** |
+| ROC-AUC | 0.9846 |
+| Precision (drought) | **0.8442** |
+| Recall (drought) | **0.8038** |
+| F1 (drought) | **0.8235** |
 | 5-fold CV accuracy | 0.9538 ± 0.0058 |
 | 5-fold CV ROC-AUC | 0.9832 ± 0.0021 |
 """)
