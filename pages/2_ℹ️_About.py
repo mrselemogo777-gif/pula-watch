@@ -22,6 +22,17 @@ rationing without confirmation from a qualified officer.
 """)
 
 # HOW TO USE
+
+st.header("🌡️ Climate Feature (ENSO)")
+st.markdown("""
+Since version 5, the model incorporates the **NOAA Oceanic Niño Index (ONI)**
+as a 31st feature. This captures Botswana's rainfall teleconnection with ENSO.
+
+**Impact:** Adding ENSO improved recall by +1.18 percentage points.
+
+[NOAA CPC ONI](https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt)
+""")
+
 st.header("How to use")
 
 st.markdown("""
@@ -63,11 +74,12 @@ st.markdown("""
 st.header("🔬 Future work")
 
 st.markdown("""
+- **IOD index** — extend the climate feature set beyond ENSO
 - Live CHIRPS API integration (currently manual dekad selection)
-- Large-scale climate indices (ENSO, IOD) — foundation for forecasting
 - Satellite vegetation indices (NDVI, EVI)
 - Soil moisture integration
 - SMS / email alerting for extension officers
+- **Forecasting mode** — predict future drought from seasonal forecasts + climate indices
 """)
 
 # AUTHOR
