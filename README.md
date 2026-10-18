@@ -35,3 +35,26 @@ Rainfall: HDX / WFP CHIRPS v2 — 16,360 dekads × 10 rural districts × 1981–
 ## Author
 
 Legakwa Selemogo · [@mrselemogo777-gif](https://github.com/mrselemogo777-gif)
+
+## 🌡️ Climate Feature (ENSO)
+
+The model incorporates the **NOAA Oceanic Niño Index (ONI)** as a 31st feature.
+
+**Why it matters:** Botswana's rainfall is teleconnected to ENSO.
+El Niño years correlate with reduced rainfall and elevated drought risk.
+
+**Impact of adding ENSO:**
+
+| Metric | Without ENSO | With ENSO | Delta |
+|---|---|---|---|
+| Accuracy | 96.20% | **96.47%** | +0.27% |
+| Precision | 83.40% | **84.42%** | +1.02% |
+| Recall | 79.20% | **80.38%** | +1.18% |
+| F1 | 81.20% | **82.35%** | +1.15% |
+| ROC-AUC | 98.50% | 98.46% | -0.04% |
+
+ENSO contributes a small but consistent signal (RF 0.6%, XGB 1.1%
+importance). The climate effect operates through rainfall, which lagged
+features already capture — ENSO adds independent context.
+
+**Data source:** [NOAA CPC ONI](https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt)

@@ -1,6 +1,6 @@
 {
   "model_type": "Ensemble (RandomForest + XGBoost average, 50/50)",
-  "n_features": 30,
+  "n_features": 31,
   "features": [
     "rfh",
     "rfh_avg",
@@ -31,48 +31,55 @@
     "lagged_3mo_ratio",
     "recent_deficit_count",
     "neighbour_lag1_ratio",
-    "neighbour_lag2_ratio"
+    "neighbour_lag2_ratio",
+    "enso_oni"
+  ],
+  "climate_features": [
+    "enso_oni"
   ],
   "recommended_threshold": 0.65,
   "operating_points": {
     "high_recall": {
       "threshold": 0.5,
-      "precision": 0.721,
-      "recall": 0.842,
-      "f1": 0.777
+      "precision": 0.72,
+      "recall": 0.85,
+      "f1": 0.78
     },
     "default": {
       "threshold": 0.65,
-      "precision": 0.834,
-      "recall": 0.792,
-      "f1": 0.812
+      "precision": 0.844,
+      "recall": 0.804,
+      "f1": 0.824
     },
     "high_precision": {
       "threshold": 0.8,
       "lag_max": 0.72,
-      "precision": 0.906,
-      "recall": 0.646,
-      "f1": 0.754
+      "precision": 0.91,
+      "recall": 0.66,
+      "f1": 0.76
     },
     "highest_precision": {
       "threshold": 0.85,
       "lag_max": 0.72,
       "precision": 0.93,
-      "recall": 0.605,
-      "f1": 0.733
+      "recall": 0.61,
+      "f1": 0.74
     }
   },
   "metrics": {
-    "accuracy_random_split": 0.962,
-    "roc_auc_random_split": 0.985,
-    "accuracy_temporal": 0.96,
-    "roc_auc_temporal": 0.981,
-    "baseline_temporal": 0.882,
-    "rule_based_f1": 0.391,
-    "cv_accuracy_mean": 0.9538,
-    "cv_accuracy_std": 0.0058
+    "accuracy_random_split": 0.9646625766871165,
+    "precision_random_split": 0.8442211055276382,
+    "recall_random_split": 0.8038277511961722,
+    "f1_random_split": 0.8235294117647058,
+    "roc_auc_random_split": 0.9846116708730586
   },
-  "data_source": "HDX / WFP CHIRPS v2",
+  "vs_baseline_without_enso": {
+    "accuracy_delta": 0.0027,
+    "precision_delta": 0.0102,
+    "recall_delta": 0.0118,
+    "f1_delta": 0.0115
+  },
+  "data_source": "HDX / WFP CHIRPS v2 + NOAA ONI",
   "districts": 10,
   "years": "1981-2026"
 }

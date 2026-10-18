@@ -13,3 +13,8 @@ venv/
 app_v1_working.py
 services_v1_working/
 utils_v1_working/
+
+# Backups (local only, do not push)
+*_v1_backup*
+*_BACKUP.csv
+utils/bwa-rainfall-engineered_v1_backup.csv

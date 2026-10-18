@@ -31,6 +31,7 @@ st.markdown("""
 | Lagged 1-month rainfall | 3 | `r1h_lag1`, `r1h_lag2`, `r1h_lag3` |
 | Spatial context | 2 | `neighbour_lag1_ratio`, `neighbour_lag2_ratio` |
 | Cumulative deficit | 3 | `lagged_3mo_avg`, `lagged_3mo_ratio`, `recent_deficit_count` |
+| **Climate index** | **1** | **`enso_oni`** (NOAA ONI) |
 | Derived | 2 | `rfh_ratio`, `r1h_ratio` |
 
 **No label leakage.** `r3q`, current `r3h`, and `anomaly` are excluded by design.
