@@ -48,6 +48,7 @@ Three models were built and **rejected** before the final version:
 | v2 | 99.5% | `r3h_ratio` |  Mathematically equivalent to `r3q / 100` |
 | v3 | 81.7% | `month` |  Worse than the 89.7% always-Normal baseline |
 | **v4** | **96.2%** | `r3h_lag1_ratio` |  **Shipped** — lagged features only |
+| **v5** | **96.47%** | `r3h_lag1_ratio` |  ✅ **Current — ENSO-enhanced** |
 
 **Key insight:** drought is a 3-month accumulated deficit. Predicting drought
 at dekad *t* requires rainfall from dekads *t-1, t-2, t-3* — not the current
@@ -96,7 +97,7 @@ st.markdown("""
 | Simple rule (`lagged_3mo_ratio < 0.7`) | 0.762 | 0.265 | 0.746 | 0.391 |
 | Random Forest @ 0.50 | 0.951 | 0.721 | 0.842 | 0.777 |
 | XGBoost @ 0.65 | 0.962 | 0.831 | 0.789 | 0.810 |
-| **Ensemble @ 0.65 (shipped)** | **0.962** | **0.834** | **0.792** | **0.812** |
+| **Ensemble @ 0.65 (shipped)** | **0.9647** | **0.8442** | **0.8038** | **0.8235** |
 | Ensemble @ 0.80 + rule | ~0.94 | **0.906** | 0.646 | 0.754 |
 """)
 
