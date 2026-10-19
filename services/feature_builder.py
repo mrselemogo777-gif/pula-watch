@@ -1,6 +1,6 @@
-"""Build the 30-feature input row for a single district-dekad.
+"""Build the 31-feature input row for a single district-dekad.
 
-The trained ensemble expects a specific 30-column vector. This class
+The trained ensemble expects a specific 31-column vector. This class
 extracts that vector from the engineered rainfall DataFrame.
 """
 import pandas as pd
@@ -18,11 +18,11 @@ class FeatureBuilder:
         self.rainfall = rainfall
         self.features = features
 
-    # ------------------------------------------------------------------
+    
     # Public API
-    # ------------------------------------------------------------------
+    
     def build(self, district: str, dekad) -> dict:
-        """Return a dict of all 30 features for one district-dekad.
+        """Return a dict of all 31 features for one district-dekad.
 
         Parameters
         ----------
@@ -45,9 +45,9 @@ class FeatureBuilder:
         """
         return pd.DataFrame([self.build(district, dekad)])[self.features]
 
-    # ------------------------------------------------------------------
+    
     # Internal
-    # ------------------------------------------------------------------
+
     def _lookup(self, district: str, dekad) -> pd.Series:
         mask = (
             (self.rainfall["district"] == district)

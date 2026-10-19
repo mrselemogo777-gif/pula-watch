@@ -71,5 +71,5 @@ MapView(dl).render()
 
 st.caption(
     "Data: HDX / WFP CHIRPS v2 · Ensemble RF + XGBoost · "
-    "30 lagged/spatial features · Human review required before action"
+    "31 features (30 lagged rainfall + ENSO) · Human review required before action"
 )
