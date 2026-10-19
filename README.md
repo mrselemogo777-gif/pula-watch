@@ -1,12 +1,12 @@
-# Pula Watch — Botswana Drought Early-Warning System
+# Pula Watch — Botswana Drought Classification Tool
 
 Ensemble (Random Forest + XGBoost) trained on 31 features — 30 lagged
-rainfall measurements plus the NOAA ONI climate index — from 16,360 dekads
-of WFP CHIRPS v2 data (1981–2026).
+rainfall measurements plus the NOAA Oceanic Niño Index (ENSO) — from 16,360
+dekads of WFP CHIRPS v2 data (1981–2026).
 
 **Live demo:** https://pula-watch.streamlit.app
 
-##  Scope
+## ⚠️ Scope
 
 Pula Watch is a **decision-support tool**, not an autonomous warning system.
 It classifies historical dekads as drought or not-drought, with confidence
@@ -14,18 +14,23 @@ tiers for human review by extension officers, NGOs, or researchers. It is
 not designed to trigger aid disbursement, livestock movement, or water
 rationing without confirmation from a qualified officer.
 
-## 📓 Notebook
+## 🌍 Climate Justice Context
 
-The full methodology is in `pula_watch.ipynb`:
+Drought is not just a physical phenomenon. The people who bear its burden
+are not distributed evenly.
 
-- Data loading & district mapping (HDX / WFP CHIRPS v2)
-- Drought definition (SADC / FEWS NET thresholds)
-- Historical analysis (2023 = worst year on record)
-- Feature engineering with leakage audit (v1–v3 rejected)
-- Random Forest + XGBoost training
-- 5-fold cross-validation
-- Temporal holdout (train pre-2015, test 2015+)
-- ENSO climate feature extension
+- **Eriksen et al. (2021)** show that adaptation limits in southern Africa
+  are shaped by unequal access to resources, not just rainfall variability.
+- **Tschakert et al. (2019)** document how vulnerability to climate stress
+  in southern Africa is produced by intersecting factors — gender, land
+  tenure, and access to water infrastructure — that a rainfall classifier
+  cannot see.
+- **Niang et al. (2014)**, in the IPCC's Africa chapter, note that drought
+  monitoring is a necessary but insufficient condition for effective relief
+  targeting.
+
+Pula Watch classifies the physical signal. It does not, and cannot, capture
+the social dimensions of drought vulnerability.
 
 ## 📊 Model Performance
 
@@ -44,10 +49,6 @@ Final model (with ENSO, 31 features):
 ## 🌡️ Climate Feature (ENSO)
 
 The model incorporates the NOAA Oceanic Niño Index (ONI) as a 31st feature.
-Botswana's rainfall is teleconnected to ENSO — El Niño years correlate with
-reduced rainfall and elevated drought risk.
-
-Impact of adding ENSO:
 
 | Metric | Without ENSO | With ENSO | Delta |
 |---|---|---|---|
@@ -57,40 +58,29 @@ Impact of adding ENSO:
 | F1 | 81.20% | 82.35% | +1.15% |
 | ROC-AUC | 98.50% | 98.46% | -0.04% |
 
-ENSO contributes a small but consistent signal (RF 0.6%, XGB 1.1% importance).
-The +1.18 pp recall improvement is the most important change.
-
-Data source: NOAA CPC ONI (cpc.ncep.noaa.gov)
-
-##  Leakage Audit
-
-Three models were built and rejected before the final version:
+## 🧪 Leakage Audit
 
 | Version | Accuracy | Top Feature | Verdict |
 |---|---|---|---|
-| v1 | 98.5% | anomaly | Linear transform of r3q (target) |
-| v2 | 99.5% | r3h_ratio | Mathematically equivalent to r3q / 100 |
-| v3 | 81.7% | month | Worse than the 89.7% always-Normal baseline |
-| v4 | 96.2% | r3h_lag1_ratio | Shipped — lagged features only |
+| v1 | 98.5% | anomaly | Linear transform of r3q |
+| v2 | 99.5% | r3h_ratio | Mathematically = r3q / 100 |
+| v3 | 81.7% | month | Worse than baseline |
+| v4 | 96.2% | r3h_lag1_ratio | Shipped — lagged only |
 | v5 | 96.47% | r3h_lag1_ratio | Current — ENSO-enhanced |
-
-Key insight: drought is a 3-month accumulated deficit. Predicting drought at
-dekad t requires rainfall from dekads t-1, t-2, t-3 — not the current dekad,
-which leaks the label. The final model uses lagged rainfall only.
 
 ## 🎯 Operating Points
 
-| Persona | Threshold | Precision | Recall | Use case |
-|---|---|---|---|---|
-| Farmer / community alert | 0.50 | 0.721 | 0.842 | Never miss a drought |
-| Balanced (default) | 0.65 | 0.844 | 0.804 | General purpose |
-| Budget-constrained | 0.80 + rule | 0.906 | 0.646 | Only high-confidence flags |
-| Highest confidence | 0.85 + rule | 0.930 | 0.605 | Minimal false alarms |
+| Persona | Threshold | Precision | Recall |
+|---|---|---|---|
+| Farmer | 0.50 | 0.721 | 0.842 |
+| Balanced (default) | 0.65 | 0.844 | 0.804 |
+| Budget-constrained | 0.80 + rule | 0.906 | 0.646 |
+| Highest confidence | 0.85 + rule | 0.930 | 0.605 |
 
 ## 🌍 Districts Covered
 
-All 10 rural districts of Botswana: Southern, South East, Kweneng, Kgatleng,
-Central, North East, North West, Chobe, Ghanzi, Kgalagadi.
+All 10 rural districts of Botswana: Southern · South East · Kweneng ·
+Kgatleng · Central · North East · North West · Chobe · Ghanzi · Kgalagadi
 
 ## 📈 Worst Drought Years on Record
 
@@ -104,12 +94,8 @@ Central, North East, North West, Chobe, Ghanzi, Kgalagadi.
 
 ## 🖥️ Technology Stack
 
-- Python 3.11
-- scikit-learn (Random Forest)
-- XGBoost (gradient boosting)
-- Streamlit (web app)
-- Geopandas + Plotly (choropleth map)
-- HDX / WFP CHIRPS v2 + NOAA ONI (data)
+Python 3.11 · scikit-learn · XGBoost · Streamlit · Geopandas · Plotly ·
+HDX / WFP CHIRPS v2 · NOAA ONI
 
 ## 📦 Installation
 
@@ -120,11 +106,31 @@ streamlit run app.py
 
 ## 🔬 Future Work
 
-- Extend to IOD (Indian Ocean Dipole) index
-- Live CHIRPS API integration
-- Satellite vegetation indices (NDVI, EVI)
-- Soil moisture integration
-- Forecasting mode using seasonal forecasts
+Pula Watch is a **historical drought classifier**, not a forecaster. It
+answers "Was this dekad a drought?" with high confidence, but not "Will the
+next dekad be a drought?"
+
+This is a deliberate design choice. The classifier provides the validation
+layer that any forecasting system needs. Once "what counts as a drought" is
+answered reliably, the next question — "what comes next?" — can be built on top.
+
+Planned work:
+
+- Integrate SADC seasonal forecasts (3–6 month lead time)
+- Add Indian Ocean Dipole (IOD) index alongside ENSO
+- Rolling-origin cross-validation for forecast evaluation
+- Extend to NDVI and soil moisture
+
+None is included in the current deployment.
+
+## 📚 References
+
+- Eriksen, S., et al. (2021). Adaptation interventions and their effect on
+  vulnerability in the Global South. World Development, 141, 105383.
+- Niang, I., et al. (2014). Africa. In Climate Change 2014: Impacts,
+  Adaptation, and Vulnerability. Cambridge University Press.
+- Tschakert, P., et al. (2019). One thousand ways to experience loss.
+  Global Environmental Change, 55, 58-72.
 
 ## 👤 Author
 
