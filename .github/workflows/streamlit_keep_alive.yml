@@ -11,3 +11,4 @@ jobs:
     steps:
       - name: Ping Pula Watch
         run: curl -s -o /dev/null https://pula-watch.streamlit.app/
+# trigger
