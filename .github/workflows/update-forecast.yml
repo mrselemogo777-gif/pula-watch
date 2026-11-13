@@ -6,27 +6,30 @@ on:
     # says 'every two weeks'. Daily is cheapest and cannot miss an update;
     # the pipeline skips download if CKAN last_modified is unchanged.
     - cron: '0 8 * * *'
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
 
 permissions:
-  contents: write  # Required for auto-commit
+  contents: write
 
 jobs:
   update-forecast:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
-          pip install pandas scikit-learn xgboost joblib numpy
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
 
       - name: Run forecast pipeline
         run: python scripts/update_forecast.py
@@ -35,9 +38,13 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add utils/latest_forecast.json utils/bwa-rainfall-engineered.csv
-          git diff --staged --quiet || git commit -m "Auto-update: dekadal forecast ($(date +%Y-%m-%d))"
-          git push
+          git add utils/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update: dekadal forecast ($(date +%Y-%m-%d))"
+            git push
+          fi
 
       - name: Report status
         run: echo "✅ Forecast pipeline completed successfully"
