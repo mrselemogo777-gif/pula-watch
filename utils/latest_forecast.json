@@ -1,0 +1,66 @@
+{
+  "generated_at": "2026-11-13T06:51:38.771270Z",
+  "dekad": "2026-10-21",
+  "predictions": [
+    {
+      "district": "CENTRAL",
+      "dekad": "2026-10-21",
+      "probability": 0.0033,
+      "tier": "LOW"
+    },
+    {
+      "district": "CHOBE",
+      "dekad": "2026-10-21",
+      "probability": 0.0,
+      "tier": "LOW"
+    },
+    {
+      "district": "GHANZI",
+      "dekad": "2026-10-21",
+      "probability": 0.0067,
+      "tier": "LOW"
+    },
+    {
+      "district": "KGALAGADI",
+      "dekad": "2026-10-21",
+      "probability": 0.005,
+      "tier": "LOW"
+    },
+    {
+      "district": "KGATLENG",
+      "dekad": "2026-10-21",
+      "probability": 0.0034,
+      "tier": "LOW"
+    },
+    {
+      "district": "KWENENG",
+      "dekad": "2026-10-21",
+      "probability": 0.0033,
+      "tier": "LOW"
+    },
+    {
+      "district": "NORTH EAST",
+      "dekad": "2026-10-21",
+      "probability": 0.0033,
+      "tier": "LOW"
+    },
+    {
+      "district": "NORTH WEST",
+      "dekad": "2026-10-21",
+      "probability": 0.0017,
+      "tier": "LOW"
+    },
+    {
+      "district": "SOUTH EAST",
+      "dekad": "2026-10-21",
+      "probability": 0.0084,
+      "tier": "LOW"
+    },
+    {
+      "district": "SOUTHERN",
+      "dekad": "2026-10-21",
+      "probability": 0.0017,
+      "tier": "LOW"
+    }
+  ]
+}
