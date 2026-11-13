@@ -3,18 +3,41 @@ import pandas as pd
 import joblib
 import json
 import os
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
 RAW_DATA_PATH = "experiments/gefs/bwa-rainfall-raw-new.csv"
+# The official HDX API link for the latest data
+HDX_URL = "https://data.humdata.org/dataset/fc2db06a-9595-407b-b13b-25686a927915/resource/20261103T164855748379_531e53d4/download"
 ENGINEERED_PATH = "utils/bwa-rainfall-engineered.csv"
 MODEL_PATH = "models/drought_ensemble.pkl"
 FEATURES_PATH = "models/features.pkl"
 OUTPUT_JSON = "utils/latest_forecast.json"
 
 
+def download_latest_data():
+    """Downloads the latest HDX data if it doesn't exist."""
+    os.makedirs(os.path.dirname(RAW_DATA_PATH), exist_ok=True)
+    
+    print(f"Downloading latest data from HDX...")
+    try:
+        # Use a user-agent so HDX doesn't block the request
+        req = urllib.request.Request(HDX_URL, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response, open(RAW_DATA_PATH, 'wb') as out_file:
+            out_file.write(response.read())
+        print("✅ Download complete.")
+    except Exception as e:
+        print(f"❌ Download failed: {e}")
+        raise
+
+
 def load_and_engineer():
-    print("1. Loading latest raw data...")
+    # 1. Ensure data exists
+    if not os.path.exists(RAW_DATA_PATH):
+        download_latest_data()
+    
+    print("1. Loading raw data...")
     df = pd.read_csv(RAW_DATA_PATH, parse_dates=["date"])
     df = df[df["adm_level"] == 1].copy()
     df["year"] = df.date.dt.year
@@ -31,34 +54,27 @@ def load_and_engineer():
     try:
         enso = pd.read_csv("utils/climate/enso_monthly.csv")
         df = df.merge(enso, on=["year", "month"], how="left")
-        print(f"   ENSO merged: {df['enso_oni'].notna().sum():,} non-null")
     except FileNotFoundError:
         df["enso_oni"] = 0.0
         print("   ⚠️ enso_monthly.csv not found — filling with 0")
 
-    # IOD merge (parse wide format if exists)
     try:
-        from pathlib import Path
         iod_path = Path("utils/climate/iod_raw.txt")
         if iod_path.exists():
             lines = iod_path.read_text().strip().split("\n")[1:]
             rows = []
             for line in lines:
                 parts = line.split()
-                if len(parts) != 13:
-                    continue
+                if len(parts) != 13: continue
                 year = int(parts[0])
                 for month in range(1, 13):
                     try:
                         val = float(parts[month])
-                        if abs(val) > 100:
-                            val = None
-                    except ValueError:
-                        val = None
+                        if abs(val) > 100: val = None
+                    except ValueError: val = None
                     rows.append({"year": year, "month": month, "iod": val})
             iod_df = pd.DataFrame(rows)
             df = df.merge(iod_df, on=["year", "month"], how="left")
-            print(f"   IOD merged: {df['iod'].notna().sum():,} non-null")
         else:
             df["iod"] = 0.0
     except Exception as e:
@@ -101,17 +117,10 @@ def run_pipeline():
     bundle = joblib.load(MODEL_PATH)
     rf, xgb = bundle["rf"], bundle["xgb"]
     features = joblib.load(FEATURES_PATH)
-    print(f"   Model expects {len(features)} features")
 
     latest_date = df["date"].max()
     latest_data = df[df["date"] == latest_date].copy()
     print(f"5. Running predictions for {latest_date.date()} ({len(latest_data)} districts)...")
-
-    # Verify all features exist
-    missing = [f for f in features if f not in latest_data.columns]
-    if missing:
-        print(f"   ❌ Missing features: {missing}")
-        return
 
     results = []
     for _, row in latest_data.iterrows():
@@ -141,7 +150,6 @@ def run_pipeline():
         json.dump(output, f, indent=2)
 
     print(f"\n✅ Saved: {OUTPUT_JSON}")
-    print(json.dumps(output, indent=2))
 
 
 if __name__ == "__main__":
