@@ -4,37 +4,62 @@ import joblib
 import json
 import os
 import urllib.request
+import urllib.parse
 from datetime import datetime
 from pathlib import Path
 
 RAW_DATA_PATH = "experiments/gefs/bwa-rainfall-raw-new.csv"
-# The official HDX API link for the latest data
-HDX_URL = "https://data.humdata.org/dataset/fc2db06a-9595-407b-b13b-25686a927915/resource/20261103T164855748379_531e53d4/download"
 ENGINEERED_PATH = "utils/bwa-rainfall-engineered.csv"
 MODEL_PATH = "models/drought_ensemble.pkl"
 FEATURES_PATH = "models/features.pkl"
 OUTPUT_JSON = "utils/latest_forecast.json"
 
+# The HDX Dataset ID
+DATASET_ID = "fc2db06a-9595-407b-b13b-25686a927915"
+
 
 def download_latest_data():
-    """Downloads the latest HDX data if it doesn't exist."""
+    """Downloads the latest HDX data using the CKAN API."""
     os.makedirs(os.path.dirname(RAW_DATA_PATH), exist_ok=True)
     
-    print(f"Downloading latest data from HDX...")
+    print("Fetching HDX metadata to find the correct download URL...")
+    api_url = f"https://data.humdata.org/api/3/action/package_show?id={DATASET_ID}"
+    
     try:
-        # Use a user-agent so HDX doesn't block the request
-        req = urllib.request.Request(HDX_URL, headers={'User-Agent': 'Mozilla/5.0'})
+        req = urllib.request.Request(api_url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req) as response:
+            meta = json.loads(response.read().decode('utf-8'))
+            
+        # Find the CSV resource
+        resources = meta['result']['resources']
+        csv_resource = next((r for r in resources if r['format'].lower() == 'csv' and 'bwa-rainfall-subnat-full' in r['name']), None)
+        
+        if not csv_resource:
+            raise ValueError("Could not find the full CSV resource in HDX metadata.")
+            
+        download_url = csv_resource['url']
+        print(f"Found download URL: {download_url}")
+        
+        # Download the actual file
+        print("Downloading...")
+        req = urllib.request.Request(download_url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req) as response, open(RAW_DATA_PATH, 'wb') as out_file:
             out_file.write(response.read())
-        print("✅ Download complete.")
+            
+        # Check file size
+        size = os.path.getsize(RAW_DATA_PATH)
+        if size < 1000:
+            raise ValueError(f"Downloaded file is too small ({size} bytes). It's likely an error page.")
+            
+        print(f"✅ Download complete. Size: {size / 1024 / 1024:.2f} MB")
+        
     except Exception as e:
         print(f"❌ Download failed: {e}")
         raise
 
 
 def load_and_engineer():
-    # 1. Ensure data exists
-    if not os.path.exists(RAW_DATA_PATH):
+    if not os.path.exists(RAW_DATA_PATH) or os.path.getsize(RAW_DATA_PATH) < 1000:
         download_latest_data()
     
     print("1. Loading raw data...")
@@ -56,7 +81,6 @@ def load_and_engineer():
         df = df.merge(enso, on=["year", "month"], how="left")
     except FileNotFoundError:
         df["enso_oni"] = 0.0
-        print("   ⚠️ enso_monthly.csv not found — filling with 0")
 
     try:
         iod_path = Path("utils/climate/iod_raw.txt")
@@ -77,9 +101,8 @@ def load_and_engineer():
             df = df.merge(iod_df, on=["year", "month"], how="left")
         else:
             df["iod"] = 0.0
-    except Exception as e:
+    except Exception:
         df["iod"] = 0.0
-        print(f"   ⚠️ IOD merge failed: {e}")
 
     print("3. Engineering features...")
     df['is_wet']    = df.month.isin([11, 12, 1, 2, 3]).astype(int)
