@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "generated_at": "2026-11-13T13:05:34.019883Z",
-=======
-  "generated_at": "2026-11-13T14:23:48.284203Z",
->>>>>>> 6d5e4fa (Include rfh and r1q rainfall metrics in forecast output)
+  "generated_at": "2026-11-13T14:53:36.403805Z",
   "dekad": "2026-10-21",
   "predictions": [
     {
@@ -13,8 +9,8 @@
       "tier": "LOW",
       "rfh": 2.8,
       "r1q": 66.9,
-      "ndvi_vim": 0.4229,
-      "ndvi_viq": 136.3263,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -24,8 +20,8 @@
       "tier": "LOW",
       "rfh": 8.7,
       "r1q": 106.8,
-      "ndvi_vim": 0.4176,
-      "ndvi_viq": 117.5628,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -35,8 +31,8 @@
       "tier": "LOW",
       "rfh": 2.2,
       "r1q": 67.3,
-      "ndvi_vim": 0.4916,
-      "ndvi_viq": 185.5876,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -46,8 +42,8 @@
       "tier": "LOW",
       "rfh": 2.5,
       "r1q": 73.4,
-      "ndvi_vim": 0.357,
-      "ndvi_viq": 165.6819,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -57,8 +53,8 @@
       "tier": "LOW",
       "rfh": 3.2,
       "r1q": 50.9,
-      "ndvi_vim": 0.525,
-      "ndvi_viq": 162.5185,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -68,8 +64,8 @@
       "tier": "LOW",
       "rfh": 3.6,
       "r1q": 53.8,
-      "ndvi_vim": 0.5309,
-      "ndvi_viq": 187.0009,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -79,8 +75,8 @@
       "tier": "LOW",
       "rfh": 3.9,
       "r1q": 71.2,
-      "ndvi_vim": 0.4813,
-      "ndvi_viq": 142.9254,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -90,8 +86,8 @@
       "tier": "LOW",
       "rfh": 4.2,
       "r1q": 77.0,
-      "ndvi_vim": 0.4561,
-      "ndvi_viq": 137.1027,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -101,8 +97,8 @@
       "tier": "LOW",
       "rfh": 4.1,
       "r1q": 46.0,
-      "ndvi_vim": 0.6001,
-      "ndvi_viq": 181.6003,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     },
     {
@@ -112,10 +108,10 @@
       "tier": "LOW",
       "rfh": 5.1,
       "r1q": 56.5,
-      "ndvi_vim": 0.5242,
-      "ndvi_viq": 188.9478,
+      "ndvi_vim": null,
+      "ndvi_viq": null,
       "food_security_flag": "NORMAL"
     }
   ],
-  "ndvi_date": "2026-11-01"
+  "ndvi_date": null
 }
