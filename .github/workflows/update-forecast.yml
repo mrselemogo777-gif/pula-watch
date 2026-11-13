@@ -2,9 +2,10 @@ name: Automated Dekadal Forecast
 
 on:
   schedule:
-    # Runs at 08:00 UTC on the 2nd, 12th, and 22nd of every month
-    # (one day after CHIRPS/HDX typically publishes new data)
-    - cron: '0 8 2,12,22 * *'
+    # WFP/HDX publishes on 1st/3rd/6th/11th/13th/16th/21st/23rd/26th, and HDX metadata
+    # says 'every two weeks'. Daily is cheapest and cannot miss an update;
+    # the pipeline skips download if CKAN last_modified is unchanged.
+    - cron: '0 8 * * *'
   workflow_dispatch:  # Allows manual trigger from GitHub Actions tab
 
 permissions:

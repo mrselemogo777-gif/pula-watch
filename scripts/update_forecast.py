@@ -4,7 +4,6 @@ import joblib
 import json
 import os
 import urllib.request
-import urllib.parse
 from datetime import datetime
 from pathlib import Path
 
@@ -30,7 +29,7 @@ def download_latest_data():
         with urllib.request.urlopen(req) as response:
             meta = json.loads(response.read().decode('utf-8'))
             
-        # Find the CSV resource
+        # Find the CSV resource dynamically
         resources = meta['result']['resources']
         csv_resource = next((r for r in resources if r['format'].lower() == 'csv' and 'bwa-rainfall-subnat-full' in r['name']), None)
         
@@ -38,7 +37,9 @@ def download_latest_data():
             raise ValueError("Could not find the full CSV resource in HDX metadata.")
             
         download_url = csv_resource['url']
+        last_modified = csv_resource.get('last_modified', 'Unknown')
         print(f"Found download URL: {download_url}")
+        print(f"Resource last modified: {last_modified}")
         
         # Download the actual file
         print("Downloading...")
@@ -46,7 +47,6 @@ def download_latest_data():
         with urllib.request.urlopen(req) as response, open(RAW_DATA_PATH, 'wb') as out_file:
             out_file.write(response.read())
             
-        # Check file size
         size = os.path.getsize(RAW_DATA_PATH)
         if size < 1000:
             raise ValueError(f"Downloaded file is too small ({size} bytes). It's likely an error page.")
