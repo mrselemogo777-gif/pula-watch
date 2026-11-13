@@ -13,6 +13,8 @@ MODEL_PATH = "models/drought_ensemble.pkl"
 FEATURES_PATH = "models/features.pkl"
 OUTPUT_JSON = "utils/latest_forecast.json"
 
+from ndvi_enrichment import enrich_output
+
 # The HDX Dataset ID
 DATASET_ID = "fc2db06a-9595-407b-b13b-25686a927915"
 
@@ -167,6 +169,8 @@ def run_pipeline():
         "dekad": str(latest_date.date()),
         "predictions": results
     }
+
+    enrich_output(output)
 
     os.makedirs(os.path.dirname(OUTPUT_JSON), exist_ok=True)
     with open(OUTPUT_JSON, "w") as f:

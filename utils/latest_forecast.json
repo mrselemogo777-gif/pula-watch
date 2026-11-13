@@ -1,66 +1,97 @@
 {
-  "generated_at": "2026-11-13T08:56:48.771030Z",
+  "generated_at": "2026-11-13T12:51:29.030794Z",
   "dekad": "2026-10-21",
   "predictions": [
     {
       "district": "CENTRAL",
       "dekad": "2026-10-21",
       "probability": 0.0033,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.3829,
+      "ndvi_viq": 137.675,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "CHOBE",
       "dekad": "2026-10-21",
       "probability": 0.0,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.3864,
+      "ndvi_viq": 123.2064,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "GHANZI",
       "dekad": "2026-10-21",
       "probability": 0.0067,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.4334,
+      "ndvi_viq": 176.712,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "KGALAGADI",
       "dekad": "2026-10-21",
       "probability": 0.005,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.3384,
+      "ndvi_viq": 162.1312,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "KGATLENG",
       "dekad": "2026-10-21",
       "probability": 0.0034,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.4969,
+      "ndvi_viq": 170.8621,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "KWENENG",
       "dekad": "2026-10-21",
       "probability": 0.0033,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.4833,
+      "ndvi_viq": 185.4385,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "NORTH EAST",
       "dekad": "2026-10-21",
       "probability": 0.0033,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.3951,
+      "ndvi_viq": 134.2581,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "NORTH WEST",
       "dekad": "2026-10-21",
       "probability": 0.0017,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.4216,
+      "ndvi_viq": 139.5648,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "SOUTH EAST",
       "dekad": "2026-10-21",
       "probability": 0.0084,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.5481,
+      "ndvi_viq": 184.2638,
+      "food_security_flag": "NORMAL"
     },
     {
       "district": "SOUTHERN",
       "dekad": "2026-10-21",
       "probability": 0.0017,
-      "tier": "LOW"
+      "tier": "LOW",
+      "ndvi_vim": 0.4837,
+      "ndvi_viq": 187.783,
+      "food_security_flag": "NORMAL"
     }
-  ]
+  ],
+  "ndvi_date": "2026-10-11"
 }
