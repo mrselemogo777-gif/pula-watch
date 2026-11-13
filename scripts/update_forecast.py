@@ -161,7 +161,9 @@ def run_pipeline():
             "district": row["district"],
             "dekad": str(latest_date.date()),
             "probability": round(float(prob), 4),
-            "tier": tier
+            "tier": tier,
+            "rfh": round(float(row["rfh"]), 1) if pd.notna(row["rfh"]) else None,
+            "r1q": round(float(row["r1q"]), 1) if pd.notna(row["r1q"]) else None
         })
 
     output = {
