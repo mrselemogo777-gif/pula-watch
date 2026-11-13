@@ -47,9 +47,7 @@ class RiskClassifier:
             tier = "LOW"
 
         # Final decision: exceeded threshold AND (rule off OR rule fires)
-        # — but the app treats the rule as optional. When the rule is ON,
-        #   the user has already chosen to require it; when OFF, only the
-        #   probability matters.
+       
         is_drought = threshold_exceeded and rule_fires
 
         return RiskResult(

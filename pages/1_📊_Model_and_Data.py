@@ -48,7 +48,7 @@ Three models were built and **rejected** before the final version:
 | v2 | 99.5% | `r3h_ratio` |  Mathematically equivalent to `r3q / 100` |
 | v3 | 81.7% | `month` |  Worse than the 89.7% always-Normal baseline |
 | **v4** | **96.2%** | `r3h_lag1_ratio` |  **Shipped** — lagged features only |
-| **v5** | **96.47%** | `r3h_lag1_ratio` |  ✅ **Current — ENSO-enhanced** |
+| **v5** | **96.47%** | `r3h_lag1_ratio` |   **Current — ENSO-enhanced** |
 
 **Key insight:** drought is a 3-month accumulated deficit. Predicting drought
 at dekad *t* requires rainfall from dekads *t-1, t-2, t-3* — not the current

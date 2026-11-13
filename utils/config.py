@@ -5,9 +5,9 @@ hardcode them.
 """
 from pathlib import Path
 
-# ---------------------------------------------------------------------
+
 # Paths
-# ---------------------------------------------------------------------
+
 BASE_DIR      = Path(__file__).resolve().parent.parent
 MODELS_DIR    = BASE_DIR / "models"
 UTILS_DIR     = BASE_DIR / "utils"
@@ -19,9 +19,8 @@ ENSEMBLE_PKL  = MODELS_DIR / "drought_ensemble.pkl"
 FEATURES_PKL  = MODELS_DIR / "features.pkl"
 METADATA_JSON = MODELS_DIR / "metadata.json"
 
-# ---------------------------------------------------------------------
+
 # Drought classification (SADC / FEWS NET thresholds on r3q)
-# ---------------------------------------------------------------------
 DROUGHT_THRESHOLDS = [
     (50,  "Extreme"),
     (60,  "Severe"),
@@ -32,9 +31,9 @@ DROUGHT_THRESHOLDS = [
 ]
 DROUGHT_CLASSES = {"Severe", "Extreme"}
 
-# ---------------------------------------------------------------------
+
 # Operating points (probability thresholds)
-# ---------------------------------------------------------------------
+
 PERSONAS = {
     "Farmer / community alert": {"threshold": 0.50, "confirm_rule": False},
     "Balanced (default)":       {"threshold": 0.65, "confirm_rule": False},
@@ -45,13 +44,13 @@ DEFAULT_THRESHOLD = 0.65
 DEFAULT_LAG_MAX   = 0.72
 THRESHOLD_RANGE   = (0.20, 0.90, 0.05)  # min, max, step
 
-# ---------------------------------------------------------------------
+
 # Risk tiers
-# ---------------------------------------------------------------------
+
 RISK_HIGH     = 0.80   # prob >= 0.80 AND rule fires
 RISK_ELEVATED = 0.65   # prob >= 0.65
 
-# ---------------------------------------------------------------------
+
 # Ensemble weights
-# ---------------------------------------------------------------------
+
 ENSEMBLE_WEIGHTS = {"random_forest": 0.5, "xgboost": 0.5}

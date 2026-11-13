@@ -21,9 +21,9 @@ class ClassificationView:
         self.year      = None
         self.dekad     = None
 
-    # ------------------------------------------------------------------
+    
     # Public
-    # ------------------------------------------------------------------
+    
     def render(self, threshold: float, confirm_rule: bool, lag_max: float) -> None:
         """Draw the selector, run the classification on click."""
         self._render_selector()
@@ -31,9 +31,9 @@ class ClassificationView:
         if st.button("🔍 Classify this dekad", type="primary"):
             self._run_and_render(threshold, confirm_rule, lag_max)
 
-    # ------------------------------------------------------------------
+    
     # Selector
-    # ------------------------------------------------------------------
+    
     def _render_selector(self) -> None:
         st.subheader("Select district, year, and dekad")
         col1, col2, col3 = st.columns(3)
@@ -57,9 +57,9 @@ class ClassificationView:
                 st.stop()
             self.dekad = st.selectbox("Dekad", dekads)
 
-    # ------------------------------------------------------------------
+    
     # Run + render
-    # ------------------------------------------------------------------
+    
     def _run_and_render(self, threshold, confirm_rule, lag_max) -> None:
         row = self.fb.build(self.district, self.dekad)
         probs = self.predictor.predict_proba(row)
@@ -99,9 +99,9 @@ class ClassificationView:
         # Sparkline of last 6 dekads
         self._render_sparkline()
 
-    # ------------------------------------------------------------------
+    
     # Sub-renderers
-    # ------------------------------------------------------------------
+
     def _render_feature_table(self, row: dict, probs: dict) -> None:
         with st.expander("📊 Full feature values for this dekad"):
             display_keys = [

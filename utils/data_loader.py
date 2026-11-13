@@ -11,9 +11,9 @@ import streamlit as st
 from utils.config import RAIN_CSV, SHAPE_FILE, DROUGHT_THRESHOLDS
 
 
-# ---------------------------------------------------------------------
+
 # Cached readers (module-level so Streamlit can hash the path arg)
-# ---------------------------------------------------------------------
+
 @st.cache_data(show_spinner=False)
 def _read_rainfall(path: str) -> pd.DataFrame:
     df = pd.read_csv(path, parse_dates=["date"])
@@ -28,9 +28,9 @@ def _read_districts(path: str) -> gpd.GeoDataFrame:
     return gpd.read_file(path)
 
 
-# ---------------------------------------------------------------------
+
 # DataLoader
-# ---------------------------------------------------------------------
+
 class DataLoader:
     """Loads and prepares the rainfall + district dataset.
 
@@ -42,9 +42,9 @@ class DataLoader:
         self.rainfall  = None
         self.districts = None
 
-    # ------------------------------------------------------------------
+    
     # Public API
-    # ------------------------------------------------------------------
+    
     def load(self) -> "DataLoader":
         """Load both sources, attach district names, add drought class."""
         self.rainfall  = _read_rainfall(str(RAIN_CSV))
@@ -53,9 +53,9 @@ class DataLoader:
         self._add_drought_class()
         return self
 
-    # ------------------------------------------------------------------
+    
     # Internal helpers (no caching needed here)
-    # ------------------------------------------------------------------
+    
     def _attach_names(self) -> None:
         """Map PCODE -> district name if not already present in CSV."""
         if "district" in self.rainfall.columns:
@@ -78,9 +78,9 @@ class DataLoader:
             self.rainfall["class"].isin(["Severe", "Extreme"]).astype(int)
         )
 
-    # ------------------------------------------------------------------
+    
     # Convenience accessors for the UI
-    # ------------------------------------------------------------------
+    
     def districts_list(self) -> list[str]:
         """Sorted list of district names for the dropdown."""
         return sorted(self.rainfall["district"].dropna().unique().tolist())

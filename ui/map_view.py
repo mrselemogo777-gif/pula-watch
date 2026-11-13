@@ -17,7 +17,7 @@ class MapView:
             st.info("Map requires plotly<6. Showing bar chart instead.")
             self._render_bar_fallback()
 
-    # ------------------------------------------------------------------
+    # map
     def _render_map(self) -> None:
         df  = self.dl.rainfall
         gdf = self.dl.districts

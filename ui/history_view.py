@@ -17,7 +17,7 @@ class HistoryView:
         with col2:
             self._render_district_table(df)
 
-    # ------------------------------------------------------------------
+    # 
     def _render_yearly_chart(self, df) -> None:
         st.subheader("Drought dekads per year")
         yearly = df[df["is_drought"] == 1].groupby("year").size()

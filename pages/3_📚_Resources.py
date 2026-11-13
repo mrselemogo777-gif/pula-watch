@@ -9,7 +9,7 @@ st.set_page_config(
 st.title("📚 Resources")
 st.caption("Data sources, references, and links for further reading.")
 
-# ---------------- DATASETS ----------------
+# DATASETS 
 st.header("Rainfall & climate data")
 
 st.markdown("""
@@ -22,7 +22,7 @@ st.markdown("""
 | **SMAP** | Soil moisture, 2015–present | [smap.jpl.nasa.gov](https://smap.jpl.nasa.gov/) |
 """)
 
-# ---------------- BOUNDARIES ----------------
+#  BOUNDARIES 
 st.header("Administrative boundaries")
 
 st.markdown("""
@@ -33,7 +33,7 @@ st.markdown("""
 | **Natural Earth** | Global boundaries, scale 1:10m | [naturalearthdata.com](https://www.naturalearthdata.com/) |
 """)
 
-# ---------------- CLIMATE INDICES ----------------
+#  CLIMATE INDICES 
 st.header("Climate indices")
 
 st.markdown("""
@@ -45,7 +45,7 @@ st.markdown("""
 | **Standardized Precipitation Index (SPI)** | WMO-recommended drought index | [WMO](https://public.wmo.int/en/resources/library/standardized-precipitation-index-spi) |
 """)
 
-# ---------------- DROUGHT STANDARDS ----------------
+# DROUGHT STANDARDS 
 st.header("Drought classification standards")
 
 st.markdown("""
@@ -67,7 +67,7 @@ Pula Watch classifies drought using **SADC / FEWS NET** thresholds on the
 - [WMO Handbook on Drought Indicators](https://library.wmo.int/) — Global standards
 """)
 
-# ---------------- TOOLS & LIBRARIES ----------------
+# TOOLS & LIBRARIES 
 st.header("Tools & libraries")
 
 st.markdown("""
@@ -79,7 +79,7 @@ st.markdown("""
 - [pandas](https://pandas.pydata.org/) — data manipulation
 """)
 
-# ---------------- FURTHER READING ----------------
+# FURTHER READING 
 st.header("Further reading")
 
 st.markdown("""

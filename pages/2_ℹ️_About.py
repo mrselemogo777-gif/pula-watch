@@ -10,7 +10,7 @@ st.title("ℹ️ About Pula Watch")
 st.caption("Botswana Drought Classification Tool")
 
 # SCOPE
-st.header("⚠️ Scope")
+st.header(" Scope")
 
 st.warning("""
 **Pula Watch is a decision-support tool, not an autonomous warning system.**

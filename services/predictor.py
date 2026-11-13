@@ -24,9 +24,9 @@ class DroughtPredictor:
         self.xgb = None
         self.features = None
 
-    # ------------------------------------------------------------------
+    
     # Loading
-    # ------------------------------------------------------------------
+
     def load(self) -> "DroughtPredictor":
         bundle = joblib.load(ENSEMBLE_PKL)
         self.rf  = bundle["rf"]
@@ -34,9 +34,9 @@ class DroughtPredictor:
         self.features = joblib.load(FEATURES_PKL)
         return self
 
-    # ------------------------------------------------------------------
+    
     # Prediction
-    # ------------------------------------------------------------------
+    
     def predict_proba(self, feature_row: dict) -> dict:
         """Return drought probabilities for one feature row.
 
